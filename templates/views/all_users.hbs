@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	{{>links}}
+<style>
+
+	section{
+		margun:0;
+		padding:20px;
+		padding-top:10rem;
+		background-color: #EEEEEE;
+	}
+	
+	.payment{
+		padding:50px;
+		padding-left:30%;
+		padding-right:30%;
+		background-color: #FFFFFF;
+	}
+	
+	form input{
+		padding:5px;
+                width:90%;
+                margin:20px;
+                height:25px;
+		border-radius:5px;
+                box-shadow:0 5px 10px rgba(.2,0,0,.2);
+                border:none;
+        }
+	
+	div.table{
+		padding:5px;
+		padding-top:20px;
+		padding-bottom:20px;
+		margin-top:20px;
+		margin-bottom:20px;
+		background-color: #FFFFFF;
+	}	
+	
+	table{
+		width:100%;
+		border:1px solid black;
+		border-collapse: collapse;
+	}
+	
+	th, tr, td{
+		font-size:7px;
+		padding:2px;
+		text-align: center;
+                border:1px solid black;
+                border-collapse: collapse;
+        }
+
+	th{
+		padding:5px;
+		background-color: blue;
+		color: #FFFFFF;
+	}
+
+	tr.heading{
+		font-size:8px;
+		text-align: center;
+	}
+
+	div.flex-box{
+		background-color: #000000;
+		display:flex;
+	}	
+	
+	.btn{
+		font-size:15px;
+		height:100%;
+		background-color:blue;
+		color: #FFFFFF;
+		box-shadow:0 5px 10px rgba(.2,0,0,.2);
+                border:none;
+	}
+
+	div.flex-btn{
+		padding:5px;
+		margin:5%;
+	}
+
+
+@media only screen and (max-width: 600px) {
+	body {
+		font-size:10px;
+	}
+	
+	section{
+		padding-top:8rem;
+	}
+		
+	.payment{
+		padding:10%;
+
+	.btn{
+		font-size:10px;
+        }
+
+	div.flex-btn a{
+		font-size:10px;
+                margin:5px;
+	}
+	
+}
+</style>
+<script>
+document.onreadystatechange = function () {
+  var state = document.readyState
+  if (state == 'interactive') {
+       document.getElementById('contents').style.visibility="hidden";
+  } else if (state == 'complete') {
+      setTimeout(function(){
+         document.getElementById('interactive');
+         document.getElementById('load').style.visibility="hidden";
+         document.getElementById('contents').style.visibility="visible";
+      },1000);
+  }
+}
+</script>
+</head>
+<body>
+	{{>header}}
+		<div id="load"></div>
+		<div>
+			<main>
+				<section id="contents">
+					<div class="flex-box">
+					<div class="flex-btn"><a href="/admin_home">Go Back</a></div>
+                                        </div>
+					<div  class="table">
+					<h3 class="text-center">Data for professional users</h3>
+                                        <table id="data_professional">
+                                        </table>
+					<div  class="table">
+					<h3 class="text-center">Data for normal users</h3>
+                                        <table id="data_user">
+                                        </table>
+                                        </div>
+                                        </div>
+				</section>	
+<script>
+
+var Encoded = "{{data_professional}}";
+
+
+function decodeHTMLEntities(text) {
+var textarea = document.createElement('textArea');
+textarea.innerHTML = text;
+return textarea.value;
+}
+
+var Decoded = decodeHTMLEntities(Encoded);
+console.log(Decoded);
+var data_object = JSON.parse(Decoded);
+console.log(data_object);
+
+var table = `<tr class="heading">
+                <th>Professional Name</th>
+                <th>Professional Number</th>
+		<th>Email Id</th>
+		<th>profession Type</th>
+		<th>Adhar Number</th>
+		<th>Area pincode</th>
+                <th>Membership Days</th>
+             </tr>`;
+var data = "";
+var i = 0;
+const TODAY_DATE = new Date();
+const DAY = TODAY_DATE.getDate();
+console.log(DAY);
+const MONTH = TODAY_DATE.getMonth()+1;
+console.log(MONTH);
+const YEAR = TODAY_DATE.getFullYear();
+console.log(YEAR);
+
+data_object.forEach(info => { 
+
+var date_payment = `${data_object[i]["YEAR"]}/${data_object[i]["MONTH"]}/${data_object[i]["DAY"]}`;
+var date1 = new Date(date_payment); 
+
+var date_now = `${YEAR}/${MONTH}/${DAY}`;
+
+var date2 = new Date(date_now);  
+
+var diffTime = Math.abs(date2 - date1);
+var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+  
+
+data += `<tr>
+        <td>${data_object[i]["NAME"]}</td>
+        <td>${data_object[i]["NUMBER"]}</td>
+	<td>${data_object[i]["EMAIL"]}</td>
+	<td>${data_object[i]["PROFESSION"]}</td>
+	<td>${data_object[i]["ADHARCARD_NUMBER"]}</td>
+	<td>${data_object[i]["PINCODE"]}</td>
+        <td>${diffDays}</td>
+        </tr>`;
+i = i + 1;
+
+});
+
+table += data;
+console.log(data);
+
+document.getElementById("data_professional").innerHTML = table;
+
+
+Encoded = "{{data_user}}";
+
+
+function decodeHTMLEntities(text) {
+var textarea = document.createElement('textArea');
+textarea.innerHTML = text;
+return textarea.value;
+}
+
+Decoded = decodeHTMLEntities(Encoded);
+console.log(Decoded);
+data_object = JSON.parse(Decoded);
+console.log(data_object);
+
+table = `<tr class="heading">
+                <th>Professional Name</th>
+                <th>Professional Number</th>
+		<th>Email Id</th>
+             </tr>`;
+data = "";
+i = 0;
+
+data_object.forEach(info => {
+
+
+data += `<tr>
+        <td>${data_object[i]["NAME"]}</td>
+        <td>${data_object[i]["NUMBER"]}</td>
+	<td>${data_object[i]["EMAIL"]}</td>
+        </tr>`;
+i = i + 1;
+
+});
+
+table += data;
+console.log(data);
+
+document.getElementById("data_user").innerHTML = table;
+
+</script>
+			</main>
+			<!-- #main -->
+		</div>
+		<!-- footer goes here -->
+	
+	{{>footer}}
+	{{>footer_js}}
+</body>
+
+</html>
+
+

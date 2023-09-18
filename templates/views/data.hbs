@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	{{>links}}
+<style>
+body{
+background-color:#FbFbFb;
+}
+
+</style>
+<script>
+document.onreadystatechange = function () {
+  var state = document.readyState
+  if (state == 'interactive') {
+       document.getElementById('contents').style.visibility="hidden";
+  } else if (state == 'complete') {
+      setTimeout(function(){
+         document.getElementById('interactive');
+         document.getElementById('load').style.visibility="hidden";
+         document.getElementById('contents').style.visibility="visible";
+      },1000);
+  }
+}
+</script>
+</head>
+<body>
+	<div id="load"></div>
+			{{>header}}
+		<div id="contents">
+		<div>
+			<main>
+				<section>
+					<div class="main-bg-img p-5 rounded-lg">
+                                        <div class="search w-50 d-flex justify-content-center" >
+						{{>search}}
+					</div>
+					</div>					
+					<div class="activation-box" {{ACTIVE_HIDDEN}}>
+					<div>
+					<p>{{ACTIVATION_STATUS}}</p></div>
+					<div class="bg-primary"><a href="{{ACTIVE}}">{{ACTIVATION_BUTTON}}</a></div></div>
+					<div class="feedback">
+					<div class="contact-details">
+					{{>contact_us}}
+					</div>
+					<div class="feedback-form">
+					{{>feedback_message}}
+					</div>
+					</div>
+				</section>
+			</main>
+		</div>
+</div>
+		{{>footer}}
+		{{>footer_js}}
+</body>
+
+</html>
+
+

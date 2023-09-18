@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{>links}}
+<style>
+
+* {box-sizing: border-box;}
+body {font-family: Verdana, sans-serif; background-color:#FBFBF9;}
+
+section{
+background-color:#FBFBF9;
+}
+
+.mySlides {display: none;}
+img {vertical-align: middle;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+  border-bottom:1px solid black;
+  z-index:0;
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 5s;
+  animation-name: fade;
+  animation-duration: 5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+div.mySlides img{
+	height:600px;
+	}
+
+h2.review_heading{
+	padding-top:10px;
+	text-align:center;
+}
+
+.main_review_container{
+	padding:20%;
+	padding-top:2%;
+}
+
+.sub_review_container{
+	padding:20px;
+	padding-top:40px;
+	border:1px solid black;
+}
+
+div.sub_review_container img.wrapimg{
+float: left;   
+margin-right: 10px;   
+border: 1px solid blue;  
+height:50px;
+width:50px;
+border-radius:100%;
+}
+
+
+div.sub_review_container h3{
+padding:5px;
+padding-bottom:1px;
+}
+
+#rate {
+                background-color: blue;
+                border-radius:5px;
+                color: white;
+                padding:5px;
+                padding-left:10px;
+                padding-right:10px;
+                margin-right:15px;
+        }
+
+.checked {
+                color: gold;
+                padding-left: 0px;
+                margin-left: 5px;
+        }
+
+div.review_text{
+	margin:5px;
+	margin-top:15px;
+	margin-left:55px;
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 780px) {
+  .text {font-size: 11px}
+
+section{
+	padding-top:5rem;
+}
+
+div.hamburger{
+background-color: #000;
+}
+
+ul.nav-menu{
+background-color: #000;
+}
+
+div.mySlides img{
+	height:300px;
+	}
+
+
+.main_review_container{
+	padding:5%;
+}
+
+}
+
+
+
+</style>
+</head>
+<body>
+{{>header}}
+<div id="load"></div>
+<div id="contents">
+                <div>
+                        <main>
+                                <section>
+<div class="slideshow-container">
+<div class="mySlides fade">
+  <div class="numbertext">1 / 3</div>
+  <img src="../views/photo/related_photos/{{NUMBER}}1.jpg" onerror="this.src='../views/photo/related_photos/{{NUMBER}}1.jpeg'" style="width:100%;">
+  <div class="text">1</div>
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">2 / 3</div>
+  <img src="../views/photo/related_photos/{{NUMBER}}2.jpg" onerror="this.src='../views/photo/related_photos/{{NUMBER}}2.jpeg'" style="width:100%;">
+  <div class="text">2</div>
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">3 / 3</div>
+  <img src="../views/photo/related_photos/{{NUMBER}}3.jpg" onerror="this.src='../views/photo/related_photos/{{NUMBER}}3.jpeg'" style="width:100%;">
+  <div class="text">3</div>
+</div>
+</div>
+<div class="main_review_container" id="main_data">
+
+</div>
+
+				</section>
+                        </main>
+                </div>
+                </div>
+<script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  slides[slideIndex-1].style.display = "block";
+  setTimeout(showSlides, 3000); // Change image every 2 seconds
+}
+</script>
+<script>
+
+let Encoded = "{{RELATED_REVIEWS}}";
+
+function decodeHTMLEntities(text) {
+var textarea = document.createElement('textArea');
+textarea.innerHTML = text;
+return textarea.value;
+}
+
+var Decoded = decodeHTMLEntities(Encoded);
+console.log(Decoded);
+var data_object = JSON.parse(Decoded);
+console.log(data_object);
+
+var Cost = 0;
+
+var data = "";
+
+data_object.forEach(info => {
+
+data += `<div class="sub_review_container">
+<img src="../views/photo/error.jpeg" class="wrapimg">
+<h3>${info["USER_NAME"]}</h3>
+<span id="rate">${info["RATE"]}<i class="fa fa-star checked"></i></span>
+<br />
+<div class="review_text">${info["TEXT"]}</div>
+</div>`;
+var i = i + 1;
+}
+);
+
+console.log(data);
+
+document.getElementById("main_data").innerHTML = data;
+
+</script>
+{{>footer}}
+{{>footer_js}}
+</body>
+</html> 

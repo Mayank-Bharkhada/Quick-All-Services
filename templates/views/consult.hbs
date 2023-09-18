@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+	{{>links}}
+<style>
+	
+	section{
+                margin:0;
+                background-color: #EEEEEE;
+        }
+
+	i{
+		font-size:15px;
+	}
+
+        .main-container{
+                padding:15%;
+                padding-top:2%;
+        }
+
+	
+	h2.alluser_heading {
+		text-align:center;
+		font-size:30px;
+	}
+
+	.about_header{
+		background-color:#000000;
+		height:160px;	
+	}
+
+	h2.alluser_heading{
+		text-align:center;
+		padding:15px;
+	}
+
+	.alluser_container{
+		margin:50px;
+		margin-top:20px;
+		padding-top:20px;
+		background-color:#FFFFFF;
+		border-radius:10px;
+                box-shadow:0 8px 16px rgba(0,0,0,.3);
+	}
+
+	.alluser_profilephoto{
+		margin-top:10px;
+		margin-left:30px;
+		margin-right:50px;
+		margin-bottom:20px;
+		width:150px;
+                height:175px;
+		border-radius:4px;
+		float:left;
+		box-shadow:0 8px 16px rgba(0,0,0,.3);
+        }
+
+	.alluser_container div{
+		padding:20px;
+	}
+
+	.alluser_container p b.alluser_info{
+		font-size:15px;
+	}
+
+	.alluser_container p i{
+		font-size:12px;
+	}
+
+	.alluser_container p b.alluser_name{
+		font-size:15px;
+	}
+
+	.alluser_checkbox label{
+                margin-left:5px;
+		font-size:20px;               
+	}
+	
+	.checked {
+		color: gold;
+		padding-left: 0px;
+		margin-left: 5px;
+	}
+
+	#rate {
+		background-color: blue;
+                border-radius:5px;
+		color: white;
+		padding:5px;
+		padding-left:10px;
+		padding-right:10px;
+		margin-right:10px;
+	}
+
+	.alluser_container form .btn1010{
+                margin-top:15px;
+                margin-left:15%;
+                width:70%;
+                height:34px;
+                border:none;
+                background-color:blue;
+                font-size:16px;
+                text-transform:uppercase;
+                color:white;
+                border-radius:4px;
+		box-shadow:0 8px 16px rgba(0,0,0,.5);
+        }
+
+input.review_btn{
+	width:30%;
+	margin-left:35%;
+}
+
+@media only screen and (max-width: 600px) {
+	section{
+                margin:0;
+		padding-top:50px;
+                background-color: #EEEEEE;
+        }
+
+	h2.alluser_heading {
+		font-size:20px;
+	}
+
+	img.alluser_profilephoto{
+		margin-top:10px;
+		margin-left:30px;
+		margin-right:25px;
+		margin-bottom:20px;
+		width:130px;
+                height:175px;
+		border-radius:4px;
+		float:left;
+		box-shadow:0 8px 16px rgba(0,0,0,.3);
+        }
+
+
+.main-container{
+                padding:2%;
+        }
+.alluser_container{       
+                margin:10px;
+        }
+.alluser_profilephoto{
+                margin-top:32px;
+        }
+
+}
+</style>
+<script>
+document.onreadystatechange = function () {
+  var state = document.readyState
+  if (state == 'interactive') {
+       document.getElementById('contents').style.visibility="hidden";
+  } else if (state == 'complete') {
+      setTimeout(function(){
+         document.getElementById('interactive');
+         document.getElementById('load').style.visibility="hidden";
+         document.getElementById('contents').style.visibility="visible";
+      },1000);
+  }
+}
+</script>
+</head>
+
+<body>
+	{{>header}}
+		<div id="load"></div>
+		<div>
+			<main>
+				<section id="contents">
+					<div class="main-container" >
+					<h2 class="alluser_heading" >Your desirable consultants</h2>
+						<div id="main_data">
+						</div>
+					</div>
+				</section>
+			</main>
+			<!-- #main -->
+		</div>
+<script>
+
+let Encoded = "{{RELATED_PROFESSIONAL}}";
+
+
+
+function decodeHTMLEntities(text) {
+var textarea = document.createElement('textArea');
+textarea.innerHTML = text;
+return textarea.value;
+}
+
+var Decoded = decodeHTMLEntities(Encoded);
+console.log(Decoded);
+var data_object = JSON.parse(Decoded);
+console.log(data_object);
+
+var Cost = 0;
+
+var data = "";
+
+data_object.forEach(info => {
+
+console.log(info['NAME']);
+
+data += `<div class="alluser_container">
+						<img src="../views/photo/${info['PHOTO']}" class="alluser_profilephoto" alt="Profile photo">
+						<div>
+        <p><b class="alluser_name">Name : </b><i id="Nam7e" >${info['NAME']}</i></p><hr />
+	<p><b class="alluser_info">Gender : </b><i id="Gender">${info['GENDER']}</i></p><hr />
+	<p><b class="alluser_info">Experience : </b><i id="Experience" >${info['EXPERIENCE']} year</i></p><hr />
+	<p><b class="alluser_info">Success Rate : </b><span id="rate">${info['SUCCESS_RATE_LEFT']}.${info['SUCCESS_RATE_RIGHT']}<i class="fa fa-star checked"></i></span><i>${info['TOTAL_RATTINGS']} votes</i></p><hr /><br />
+	<form action="/reviews" class="alluser_checkbox" method="POST">
+	<input type="hidden" name="Number" value="${info['NUMBER']}" required>
+	<input type="submit" class="review_btn" style="border: 0px; background-color: #fff; color: green; align:center;"  value="Photos & Reviews">
+						</form>
+	<form action="/hire_professional" class="alluser_checkbox" method="POST">
+	<input type="hidden" name="Name" value="${info['NAME']}" required>
+	<input type="hidden" name="Number" value="${info['NUMBER']}" required>
+	<input type="hidden" name="Email" value="${info['EMAIL']}" required>
+	<input type="hidden" name="Pincode" value="${info['PINCODE']}" required>
+	<input type="submit" class="btn1010 btn" value="Hire Professional">
+						</form>
+						</div>
+						</div>`;
+var i = i + 1;
+}
+);
+
+console.log(data);
+
+document.getElementById("main_data").innerHTML = data;
+
+</script>
+<!-- footer goes here -->
+{{>footer}}
+{{>footer_js}}
+</body>
+</html>

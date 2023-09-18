@@ -1,0 +1,16 @@
+	<script>
+					document.getElementById("button").setAttribute("disabled", null); 
+										document.getElementById("button").style.background = "#808080"; 
+					document.getElementById("number").addEventListener("keyup", function(){
+									var number_input = document.getElementById("number").value;
+									var number_length = number_input.length;
+									console.log(number_length);
+								 if ( number_length == 13)
+								 { document.getElementById("button").removeAttribute("disabled");
+									  document.getElementById("button").style.background = "blue";
+								 } else {
+								 document.getElementById("button").setAttribute("disabled", null); 
+								 document.getElementById("button").style.background = "#808080";
+								 }
+								 });
+	</script>

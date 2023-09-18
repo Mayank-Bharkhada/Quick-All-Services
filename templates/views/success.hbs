@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	{{>links}}
+<style>
+	
+
+	section{
+		margun:0;
+		background-color: #EEEEEE;
+		height:800px;
+	}
+	
+	.payment{
+		padding:20%;
+		padding-top:10%;
+		background-color: #FFFFFF;
+		position:absolute;
+		top:10rem;
+		margin-left:20%;
+		width:60%;
+		height:500px;
+	}
+	
+
+	.btn{
+		padding:0;
+		width:100%;
+		margin-top:5px;
+		background-color: blue;
+		color: #FFFFFF;
+		box-shadow:0 5px 10px rgba(.2,0,0,.2);
+                border:none;
+	}
+
+	
+@media only screen and (max-width: 600px) {
+	body {
+        font-size:10px;
+	}
+
+	section{
+		height:500px;
+	}
+	
+	.payment{
+		padding:10%;
+		position:absolute;
+		top:8rem;
+		margin-left:5%;
+		width:90%;
+		height:300px;
+	}
+
+	.btn{
+                font-size:13px;
+        }
+}
+
+</style>
+<script>
+document.onreadystatechange = function () {
+  var state = document.readyState
+  if (state == 'interactive') {
+       document.getElementById('contents').style.visibility="hidden";
+  } else if (state == 'complete') {
+      setTimeout(function(){
+         document.getElementById('interactive');
+         document.getElementById('load').style.visibility="hidden";
+         document.getElementById('contents').style.visibility="visible";
+      },1000);
+  }
+}
+</script>
+</head>
+<body>
+	{{>header}}
+		<div id="load"></div>
+		<div>
+			<main>
+				<section id="contents">>
+                                        <div class="payment text-center">
+					<h1>Your payment is successfull</h1>
+                                        <div class="btn"><a href="/paynow">Make Other Payments</a></div>
+                                        </div>
+				</section>	
+			</main>
+			<!-- #main -->
+		</div>
+		<!-- footer goes here -->
+	{{>footer}}
+	{{>footer_js}}
+</body>
+
+</html>
+
+

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	{{>links}}
+<style>
+	body{
+	width:100%;
+	background-color: #EEEEEE;
+	}
+	
+	section{
+	height:800px;
+	background-color: #EEEEEE;
+	}
+		
+	.left-container{
+	background-color: blue;
+	color: #FFFFFF;
+	margin:0;
+	padding-top:12%;
+	padding-left:0%;
+	border-radius:10px;
+	box-shadow:0 5px 10px rgba(.5,0,0,.5);
+	position: absolute;
+	top:150px;
+	left:5%;
+	width:90%;
+	height:500px;	
+	}
+	
+	.left-container p{
+		margin-left:7%;
+		font-size:10px;
+		width:30%;
+	}
+
+	.left-container img{
+                width:30%;
+                height:110px;
+                margin-top:5%;
+                margin-left:5.5%;
+                padding-left:0px;
+        }
+
+	.right-container{
+	background-color: #FFFFFF;
+	color: #000000;
+	margin:0;
+	padding:5%;
+	padding-top:10%;
+	border-radius:10px;
+	box-shadow:0 5px 10px rgba(1,0,0,1);
+	position: absolute;
+	top:80px;
+	left:43%;
+	width:47%;
+	height:640px;	
+	}
+	
+	div.form-container form{
+		width:100%;
+		padding:2%;
+	}
+	
+	form input{
+		padding:7px;
+		width:100%;
+		margin:10px;
+		height:30px;
+		border-radius:5px;
+		box-shadow:0 5px 10px rgba(.2,0,0,.2);
+		border:none;	
+	}
+	
+	select{
+		padding-left:10px;
+		height:25px;
+		width:95%;
+		margin-left:5px;
+		background-color: #FFFFFF;
+		border:none;
+		border-radius:5px;
+		box-shadow:0 5px 10px rgba(.2,0,0,.2);
+	}
+	
+	div.select-two{
+		margin-top:10px;
+		margin-bottom:10px;
+		display:flex
+	}
+
+	div.select-two-2{
+		margin:auto;
+	}
+
+	textarea{
+		padding:7px;
+                width:100%;
+		height:100px;
+                margin:5px;
+                border-radius:5px;
+                box-shadow:0 5px 10px rgba(.2,0,0,.2);
+                border:none;
+	}
+	
+	form input.btn{
+		padding:0;	
+		background-color: blue;
+		color: #FFFFFF;
+		border:none;
+		box-shadow:0 5px 10px rgba(.2,0,0,.2);
+	}
+
+	div a.create-accountlink{
+		margin:15px;
+		padding-left:10px;
+		font-size:14px;
+	}
+
+	.btn-forgot-password{
+		padding:0px;
+		margin:0px;
+		margin-top:5px;
+	}
+
+	div.btn-forgot-password a{
+		color: #228B22;
+	}
+
+	#geolocation{
+	background-color:blue;
+	color:white;
+	position: fixed;
+        top:0%;
+        left:0%;
+        width:100%;
+        height:100%;
+	padding:30%;
+	padding-top:50%;
+	}
+
+
+.star-rating {
+   margin: 25px 0 0px;
+  font-size: 0;
+  white-space: nowrap;
+  display: inline-block;
+  width: 175px;
+  height: 35px;
+  overflow: hidden;
+  position: relative;
+  background: url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjREREREREIiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=');
+  background-size: contain;
+}
+
+.star-rating i {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 20%;
+  z-index: 1;
+  background: url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjRkZERjg4IiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=');
+  background-size: contain;
+}
+
+.star-rating input {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  opacity: 0;
+  display: inline-block;
+  width: 20%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+  position: relative;
+}
+.star-rating input:hover + i,
+.star-rating input:checked + i {
+  opacity: 1;
+}
+.star-rating i ~ i {
+  width: 40%;
+}
+.star-rating i ~ i ~ i {
+  width: 60%;
+}
+.star-rating i ~ i ~ i ~ i {
+  width: 80%;
+}
+.star-rating i ~ i ~ i ~ i ~ i {
+  width: 100%;
+}
+
+
+@media only screen and (max-width: 600px) {
+        body {
+	}
+	
+	section{
+		height:400px;
+	}
+
+	.left-container{
+        background-color: blue;
+        color: #FFFFFF;
+        margin:0;
+        padding-top:1%;
+        padding-left:0px;
+        border-radius:10px;
+        box-shadow:0 5px 10px rgba(.5,0,0,.5);
+        position: absolute;
+        top:10px;
+        left:5%;
+        width:90%;
+        height:90%;
+        }
+
+        .left-container p{
+	display: none;
+     }
+
+	.left-container img{
+                width:45%;
+                height:80px;
+                margin-top:0%;
+                margin-left:30%;
+        }
+        .right-container{
+        background-color: #FFFFFF;
+        color: #000000;
+        margin:0;
+	padding:10%;
+        border-radius:10px;
+        box-shadow:0 5px 10px rgba(1,0,0,1);
+        position: absolute;
+        top:95px;
+        left:10%;
+        width:80%;
+        height:70%;
+        }
+
+	div.form-container form{
+		font-size:10px;
+		width:100%;
+		padding:1%;
+		font-size:10px;
+	}
+
+	form input{
+		padding-left:5px;
+		width:100%;
+		margin:4px;
+		height:20px;
+		border-radius:5px;
+	}
+
+	select{
+		padding:2px;
+		height:20px;
+	}
+	
+	textarea{
+		height:75px;
+}
+
+	form input.btn{	
+		margin-top:10px;
+		font-size:12px;
+		padding:0px;
+		height:20px;
+		background-color: blue;
+		color: #FFFFFF;
+	}
+	
+	div a.create-accountlink{
+		margin:15px;
+		padding-left:10px;
+		font-size:7px;
+	}
+
+	#geolocation{
+	background-color:blue;
+	color:white;
+	position: fixed;
+        top:0%;
+        left:0%;
+        width:100%;
+        height:100%;
+	padding:20%;
+	padding-top:50%;
+	}
+
+
+}
+</style>
+<script>
+document.onreadystatechange = function () {
+  var state = document.readyState
+  if (state == 'interactive') {
+       document.getElementById('contents').style.visibility="hidden";
+  } else if (state == 'complete') {
+      setTimeout(function(){
+         document.getElementById('interactive');
+         document.getElementById('load').style.visibility="hidden";
+         document.getElementById('contents').style.visibility="visible";
+      },1000);
+  }
+}
+
+</script>
+</head>
+<body>
+		<div id="load"></div>
+		<div>
+			<main>
+			<section>
+			<div class="left-container">
+                                        <img rel="Website name" src="./views/photo/Name_logo.png">
+                                        <div class="text-light"><p class="text-center">welcome to our website, login and injoy our services...</p></div>
+                                        </div>
+                                        <div class="right-container form-container">
+<form action="/success_rate" class="rating" method="POST">
+<label>Give Success Rate : </label><br />
+<span class="star-rating">
+<input type="radio" name="rating" value="1"><i></i>
+<input type="radio" name="rating" value="2"><i></i>
+<input type="radio" name="rating" value="3"><i></i>
+<input type="radio" name="rating" value="4"><i></i>
+<input type="radio" name="rating" value="5"><i></i>
+</span><br /><br />
+                                        <input type="hidden" name="AN" value="{{AN}}" required>
+<label for="message">Your Review Message</label><br />
+                            <textarea type="text" name="Review" placeholder="Enter your review here..." rows="3" class="form-control "></textarea><br />
+                                        <input type="submit" class="btn" value="SUBMIT">
+                                        </form>
+                                        </div>
+                                        </div>
+			</section>
+			</main>
+			<!-- #main -->
+		</div>
+		<!-- footer goes here -->
+	{{>footer}}
+	{{>number_validation}}
+<div id="geolocation"></div>				
+<script>
+var x = document.getElementById("geolocation");
+x.style.visibility="hidden";
+        if(navigator.geolocation){  
+	    x.innerHTML = "<h2>You are eligible for this web-appliation</h2>";
+	    navigator.geolocation.getCurrentPosition(showPosition)
+        }  
+        else  
+        {  
+            alert("Sorry!This Web-application is now only allowed for the rajkot citisions");
+	    x.style.visibility="visible";
+	    x.innerHTML = "<h2>We can not get your location please try though other web browser or try again later...</h2>";
+        }  
+
+function showPosition(position){  
+	var Latitude =  position.coords.latitude;
+	var Longitude =  position.coords.longitude;  
+	var Y = document.getElementById("Latitude");
+	var Z = document.getElementById("Longitude");
+	Y.value = Latitude;
+	Z.value = Longitude;
+	if( Latitude >= 21.25 && Latitude <= 21.32 && Longitude >= 70.21 && Longitude <= 70.27){
+		x.style.visibility="hidden";
+	}else{
+	x.style.visibility="visible";
+	x.innerHTML = `<h1>This Web-application is now only allowed to use for the Rajkot citizens.</h1><hr /><h1>You have to be in Rajkot to use this web-application...</h1>`;
+	}
+     }  
+		
+</script>
+</body>
+
+</html>
+
+

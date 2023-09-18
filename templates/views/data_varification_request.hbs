@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	{{>links}}
+<style>
+	section{
+		margun:0;
+		padding:20px;
+		padding-top:9rem;
+		background-color: #EEEEEE;
+	}
+	
+	.payment{
+		padding:50px;
+		padding-left:30%;
+		padding-right:30%;
+		background-color: #FFFFFF;
+	}
+	
+	form input{
+                width:90%;
+                margin:20px;
+                height:25px;
+                box-shadow:0 5px 10px rgba(.2,0,0,.2);
+                border:none;
+        }
+	
+	div.table{
+		padding:5px;
+		padding-top:20px;
+		padding-bottom:20px;
+		margin-top:20px;
+		margin-bottom:20px;
+		background-color: #FFFFFF;
+	}	
+	
+	table{
+		width:100%;
+		border:1px solid black;
+		border-collapse: collapse;
+	}
+	
+	th, tr, td{
+		text-align: center;
+		padding:2px;
+                border:1px solid black;
+                border-collapse: collapse;
+        }
+
+	th{
+		padding:5px;
+		background-color: blue;
+		color: #FFFFFF;
+	}
+
+	tr.heading{
+		text-align: center;
+	}
+
+	div.flex-box{
+		background-color: #000000;
+		display:flex;
+	}	
+	
+	.btn{
+		padding:0;
+		font-size:15px;
+		height:100%;
+		background-color:blue;
+		color: #FFFFFF;
+		box-shadow:0 5px 10px rgba(.2,0,0,.2);
+                border:none;
+	}
+
+	div.flex-btn{
+		padding:5px;
+		margin:5%;
+	}
+
+
+@media only screen and (max-width: 600px) {
+	body {
+		font-size:10px;
+	}
+	
+	section{
+		padding-top:8rem;
+	}
+		
+	.payment{
+		padding:10%;
+
+	.btn{
+		font-size:10px;
+        }
+
+	div.flex-btn a{
+		font-size:10px;
+                margin:5px;
+	}
+	
+}
+</style>
+<script>
+document.onreadystatechange = function () {
+  var state = document.readyState
+  if (state == 'interactive') {
+       document.getElementById('contents').style.visibility="hidden";
+  } else if (state == 'complete') {
+      setTimeout(function(){
+         document.getElementById('interactive');
+         document.getElementById('load').style.visibility="hidden";
+         document.getElementById('contents').style.visibility="visible";
+      },1000);
+  }
+}
+</script>
+</head>
+<body>
+	{{>header}}
+		<div id="load"></div>
+		<div>
+			<main>
+				<section id="contents">
+					<div class="flex-box">
+					<div class="flex-btn"><a href="/varify_professional">Varify professional</a></div>
+					<div class="flex-btn"><a href="/admin_home">Go Back</a></div>
+                                        </div>
+					<div  class="table">
+                                        <table id="varification_data">
+                                        </table>
+                                        </div>
+				</section>	
+<script>
+
+let Encoded = "{{Data_varification_request}}";
+
+
+function decodeHTMLEntities(text) {
+var textarea = document.createElement('textArea');
+textarea.innerHTML = text;
+return textarea.value;
+}
+
+var Decoded = decodeHTMLEntities(Encoded);
+console.log(Decoded);
+var data_object = JSON.parse(Decoded);
+console.log(data_object);
+
+var table = `<tr class="heading">
+                <th>Professional Name</th>
+                <th>Professional Number</th>
+                <th>Adharcard number</th>
+             </tr>`;
+var data = "";
+var i = 0;
+
+data_object.forEach(info => {
+
+
+data += `<tr>
+        <td>${data_object[i]["NAME"]}</td>
+        <td>${data_object[i]["NUMBER"]}</td>
+        <td>${data_object[i]["ADHARCARD_NUMBER"]}</td>
+        </tr>`;
+i = i + 1;
+
+});
+
+table += data;
+console.log(data);
+
+document.getElementById("varification_data").innerHTML = table;
+
+</script>
+			</main>
+			<!-- #main -->
+		</div>
+		<!-- footer goes here -->
+	
+	{{>footer}}
+	{{>footer_js}}
+</body>
+
+</html>
+
+

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	{{>links}}
+<style>
+	
+	section{
+		margin:0;
+		background-color: #EEEEEE;
+		height:800px;
+	}
+	
+	.main-container{
+		padding:12%;
+		padding-top:7%;
+		background-color: #FFFFFF;
+		position:absolute;
+		top:100px;
+		margin-left:20%;
+		margin-bottom:50px;
+		width:60%;
+		height:700px;
+	}
+	
+	form textarea{
+                width:90%;
+                margin:20px;
+	         margin-bottom:10px;
+		 border-radius:25%;
+		 box-shadow:0 5px 10px rgba(.2,0,0,.2);
+                 border:none;
+        }
+
+	form p{	
+		font-size:6px;
+	}
+
+	.btn{
+		margin:20px;
+		padding:5px;
+		height:100%;
+		width:100%;
+		font-size:15px;
+		background-color: blue;
+		color: #FFFFFF;
+		box-shadow:0 5px 10px rgba(.2,0,0,.2);
+                border:none;
+	}
+
+#geolocation{
+        background-color:blue;
+        color:white;
+        position: fixed;
+        top:0%;
+        left:0%;
+        width:100%;
+        height:100%;
+        padding:30%;
+        padding-top:50%;
+        }
+	
+@media only screen and (max-width: 600px) {
+	body {
+        font-size:10px;
+	}
+
+	section{
+                height:600px;
+        }
+
+	.main-container{
+		padding:10%;
+		position:absolute;
+		top:75px;
+		margin-left:5%;
+		width:90%;
+		height:500px;
+	}
+	
+	.btn{
+		margin:10px;
+		font-size:12px;
+	}
+
+
+#geolocation{
+        background-color:blue;
+        color:white;
+        position: fixed;
+        top:0%;
+        left:0%;
+        width:100%;
+        height:100%;
+        padding:20%;
+        padding-top:50%;
+        }
+	
+
+}
+
+</style>
+<script>
+document.onreadystatechange = function () {
+  var state = document.readyState
+  if (state == 'interactive') {
+       document.getElementById('contents').style.visibility="hidden";
+  } else if (state == 'complete') {
+      setTimeout(function(){
+         document.getElementById('interactive');
+         document.getElementById('load').style.visibility="hidden";
+         document.getElementById('contents').style.visibility="visible";
+      },1000);
+  }
+}
+</script>
+</head>
+<body>
+	{{>header}}
+		<div id="load"></div>
+		<div>
+			<main>
+				<section id="contents">
+                                        <div class="main-container">
+	<div class="card">
+            <span class="bg-primary text-white text-center">Hire rate</span><br />
+            <div>
+                <h1 class="text-primary text-center">{{PROFESSION}} <span id="price"></span> RS.</h1>
+            </div><hr />
+            <div>
+                <ul class="list-styled">
+                    <li>Hire rate is on the basics of professional type</li><br />
+                    <li>You have to pay hire rate to our professional in cash</li><br />
+                    <li>Our professional provide services in just 20 minuts</li><br />
+                    <li>Fill your issue and complete the final step for hiring the professinal</li><br />
+                </ul>
+            </div>
+       </div><br />
+					<form action="/hired" method="POST">
+                                        <lable for="issue"><b>Your issues : </b></lable>
+					<input type="hidden" id="Latitude" class="" name="Latitude" required>
+                                        <input type="hidden" class="" name="Longitude" id="Longitude" required>
+					<textarea type="text" name="Text" placeholder="Write your issue here" rows="4" class="form-control md-textarea"></textarea><br />
+					<p class="text-danger" >*Be sure that you have to pay hire rate as some fixed amount for hiring the professional to the professional in cash </p>
+                                        <input type="submit" class="btn" value="Hire Now" />
+                                        </form>
+                                        </div>
+				</section>	
+			</main>
+			<!-- #main -->
+		</div>
+		<!-- footer goes here -->
+	
+	{{>footer}}
+<div id="geolocation"></div>
+<script>
+var x = document.getElementById("geolocation");
+x.style.visibility="hidden";
+        if(navigator.geolocation){
+            x.innerHTML = "<h2>You are eligible for this web-appliation</h2>";
+            navigator.geolocation.getCurrentPosition(showPosition)
+        }
+        else
+        {
+            alert("Sorry!This Web-application is now only allowed for the rajkot citisions");
+            x.style.visibility="visible";
+            x.innerHTML = "<h2>We can not get your location please try though other web browser or try again later...</h2>";
+        }
+
+function showPosition(position){
+        var Latitude =  position.coords.latitude;                                                                                                                                                                          var Longitude =  position.coords.longitude;
+        var Y = document.getElementById("Latitude");
+        var Z = document.getElementById("Longitude");
+        Y.value = Latitude;
+        Z.value = Longitude;                                                                                                                                                                                               if( Latitude >= 21.25 && Latitude <= 21.32 && Longitude >= 70.21 && Longitude <= 70.27){
+                x.style.visibility="hidden";
+        }else{
+        x.style.visibility="visible";
+        x.innerHTML = `<h1>This Web-application is now only allowed to use for the Rajkot citizens.</h1><hr /><h1>You have to be in Rajkot to use this web-application...</h1>`;
+        }
+     }
+
+</script>
+<script>
+var PROFESSION = "{{PROFESSION}}";
+
+if (PROFESSION == "Painter") {
+var Price = 50;
+} else if (PROFESSION == "Photographer") {
+var Price = 100;
+} else {
+var Price = 150;
+}
+document.getElementById("price").innerText = Price;
+</script>
+{{>footer}}
+{{>footer_js}}
+</body>
+
+</html>
+
+

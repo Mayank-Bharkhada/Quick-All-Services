@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	{{>links}}
+<style>
+body{
+	background-color: #EEEEEE;
+}
+	
+	section{
+		margun:0;
+		background-color: #EEEEEE;
+		height:800px;
+	}
+	
+	.payment{
+		padding:15%;
+		background-color: #FFFFFF;
+		position:absolute;
+		top:10rem;
+		margin-left:20%;
+		width:60%;
+		height:500px;
+	}
+	
+	form input{
+		padding:5px;
+                width:90%;
+                margin:20px;
+                height:25px;
+                box-shadow:0 5px 10px rgba(.2,0,0,.2);
+                border:none;
+        }
+
+	.btn{
+		padding:2px;
+		font-size:15px;
+		height:100%;
+		background-color: blue;
+		color: #FFFFFF;
+		box-shadow:0 5px 10px rgba(.2,0,0,.2);
+                border:none;
+	}
+	
+@media only screen and (max-width: 600px) {
+	body {
+        font-size:10px;
+	}
+
+	section{
+		height:500px;
+	}
+	
+	.payment{
+		position:absolute;
+		top:8rem;
+		margin-left:5%;
+		width:90%;
+		height:300px;
+	}
+
+	.btn{
+                font-size:11px;
+		height:100%;
+        }
+}
+
+</style>
+<script>
+document.onreadystatechange = function () {
+  var state = document.readyState
+  if (state == 'interactive') {
+       document.getElementById('contents').style.visibility="hidden";
+  } else if (state == 'complete') {
+      setTimeout(function(){
+         document.getElementById('interactive');
+         document.getElementById('load').style.visibility="hidden";
+         document.getElementById('contents').style.visibility="visible";
+      },1000);
+  }
+}
+</script>
+</head>
+<body>
+	{{>header}}
+		<div id="load"></div>
+		<div>
+			<main>
+				<section id="contents">
+                                        <div class="payment">
+					<form action="/block_id" method="POST">
+                                        <label for="Number">Number :</label><br />
+                                        <input type="text" class="" name="Number" value="+91">
+                                        <input type="submit" class="btn" value="Block Now">
+                                        </form>
+                                        </div>
+				</section>	
+			</main>
+			<!-- #main -->
+		</div>
+		<!-- footer goes here -->
+	
+	{{>footer}}
+	{{>footer_js}}
+</body>
+
+</html>
+
+

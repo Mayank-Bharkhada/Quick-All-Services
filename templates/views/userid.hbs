@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	{{>links}}
+<style>
+     
+	section{
+                margin-top: 50px;
+                background-color: #EEEEEE;
+		z-index:0;
+        }
+
+        .main-container{
+		width:100%;
+                padding:50px;
+                padding-top:0;
+		padding-left:100px;
+		padding-right:100px;
+                background-color: #EEEEEE;
+        }
+
+	h2.userid_info_name{
+		padding-top:2px;
+		text-align:left;
+		}
+
+	h2.userid_info{
+		text-align:center;
+		}
+
+	img.userid_profile_photo{
+		margin-top:5%;
+		margin-left:10%;
+		margin-right:15%;
+		margin-bottom:5%;
+		height:225px;
+		width:225px;
+		border-radius:20%;
+		box-shadow: 0 0 100px #719ECE;
+		float:left;
+	}
+
+	.userid_info{
+		padding-top:5%;
+		text-align:center;
+	}
+
+	a.userid_editlink{
+		width:100%;
+		margin:10px;
+		text-align:center;
+		background-color: blue;
+		color: #FFFFFF;
+		padding-top:5px;
+		width:60%;
+		border:none;
+		box-shadow:0 5px 10px rgba(0,0,0,.1);
+	}
+
+	.userid_consultation_heading h2{
+		color:white;
+		text-align:center;
+	}
+
+	.userid_consultation_heading{
+		background-color: blue;
+		width:70%;
+		padding:5px;
+		margin-left:14.5%;
+		margin-top:2%;	
+	}
+
+	div.userid_consultation{
+		background-color: #FFFFFF;
+		padding:30px;
+		padding-top:20px;
+		margin-bottom:20px;
+		margin-left:14.5%;
+		width:70%;
+		background-color:#FFFFFF;
+	}
+
+
+@media only screen and (max-width: 600px) {
+
+        section{
+                margin-top:50;
+                background-color: #EEEEEE;
+        }
+
+        .main-container{
+                padding:10px;
+		padding-left:30px;
+		padding-right:30px;
+                background-color: #EEEEEE;
+        }
+	
+	.useid_container img.userid_profile_photo{
+                margin-top:7%;
+                margin-left:5%;
+                margin-right:10%;
+                margin-bottom:10%;
+                height:175px;
+                width:150px;
+                border-radius:25px;
+                float:left;
+        }
+
+	.userid_info{
+		padding-top:8%;
+		text-align:center;
+	}
+
+	div.userid_consultation h2.userid_info{
+		padding-top:4%;
+		text-align:center;
+	}
+
+
+	.userid_consultation_heading{
+		padding:10px;
+		margin-top:4%;	
+	}
+	
+}
+
+</style>
+<script>
+document.onreadystatechange = function () {
+  var state = document.readyState
+  if (state == 'interactive') {
+       document.getElementById('contents').style.visibility="hidden";
+  } else if (state == 'complete') {
+      setTimeout(function(){
+         document.getElementById('interactive');
+         document.getElementById('load').style.visibility="hidden";
+         document.getElementById('contents').style.visibility="visible";
+      },1000);
+  }
+}
+</script>
+</head>
+<body>
+	{{>header}}
+	<div id="load"></div>
+		<div>
+			<main>
+				<section id="contents">
+				<div class="main-container" >
+					<div class="useid_container">
+					<img src="../views/photo/{{Photo_link}}" onerror="this.src='../views/photo/error.jpeg'"  class="userid_profile_photo" alt="office image">
+					<div class="userid_info">
+					<h2 class="userid_info_name">NAME : {{NAME}}</h2><hr />
+					<h2 class="userid_info_name">GENDER : {{GENDER}}</h2><hr />
+					<h2 class="userid_info_name">AGE : {{AGE}}</h2><hr />
+					<h2 class="userid_info_name">Working Experience : {{EXPERIENCE}} years</h2><hr />
+					<a class="userid_editlink" href="/edit_profile"><h3>Edit Profile</h3></a>
+					<a class="userid_editlink" href="/pay"><h3>Pay your bills</h3></a>
+					</div>
+					<div class="userid_consultation_heading"><h2>Your Information</h2></div>
+					<div class="userid_consultation">
+					<div class="userid_consultation_text">
+					<h2 class="userid_info">Contry : {{COUNTRY}}</h2>
+					<h2 class="userid_info">State : {{STATE}}</h2>
+					<h2 class="userid_info">Area Pincode : {{PINCODE}}</h2>
+					<h2 class="userid_info">Description : {{DESCRIPTION}}</h2>
+					</div>
+					</div>
+				</div>
+				</section>
+			</main>
+			<!-- #main -->
+		</div>
+<!-- footer goes here -->
+{{>footer}}
+{{>footer_js}}
+</body>
+</html>
+

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+	{{>links}}
+	<style>
+		section {
+			margin: 0;
+			background-color: #EEEEEE;
+			height: 100%;
+		}
+
+		form {
+			display: hidden;
+		}
+	</style>
+	<script>
+
+		function onLoadSubmit() {
+			document.TYPE_FORM.submit();
+		}
+
+	</script>
+</head>
+
+<body onload="onLoadSubmit()">
+	{{>header}}
+	<div>
+		<main>
+			<section>
+				<form name="TYPE_FORM" action="/related_profession" method="POST">
+					<input type="hidden" class="" name="TYPE" value="{{TYPE}}" required>
+				</form>
+			</section>
+		</main>
+		<!-- #main -->
+	</div>
+	<!-- footer goes here -->
+
+	{{>footer}}
+	<script>
+		{ {> footer } }
+		{ {> footer_js } }
+</body >
+
+</html >

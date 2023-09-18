@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+	{{>links}}
+<style>
+	body{
+		width:100%;
+	}	
+
+        section{
+                margin:0;
+                background-color: #EEEEEE;
+        }
+
+
+        .payment{
+		padding:5%;
+                background-color: #EEEEEE;
+        }
+
+        form input{
+                width:90%;
+                margin:20px;
+                height:25px;
+                box-shadow:0 5px 10px rgba(.2,0,0,.2);
+                border:none;
+        }
+        .btn{
+                padding:0;
+                height:100%;
+                background-color: blue;
+                color: #FFFFFF;
+                border:none;
+        }
+
+	div.flex-box{
+		display:flex;
+	}
+
+	div.flex-box div{
+		height:150px;
+		width:125px;
+		text-align:center;
+		margin:1%;
+		padding:20px;
+		background-color: #FFFFFF;
+		color: #000000;
+		box-shadow:0 5px 10px rgba(.2,0,0,.2);
+                border-radius:10px;
+	}
+	
+	img.profession_icons{
+		width:50px;
+		height:50px;
+	}
+
+	section h5{
+		padding:5px;
+		font-size:12px;
+		color: #000000;
+	}
+	
+
+@media only screen and (max-width: 600px) {
+        body {
+        font-size:10px;
+        }
+
+        section{
+		padding-top:80px;
+        }
+
+        .payment{
+                padding:5%;
+        }
+
+	div.flex-box div{
+		padding:5px;
+		height:100px;
+		width:125px;
+		text-align:center;
+		padding-right:0;
+		margin:1%;;
+	}
+
+	
+	img.profession_icons{
+		width:90%;
+		height:50px;
+	}
+
+	section h5{
+		font-size:8px;
+	}
+	
+}	
+
+
+</style>
+<script>
+document.onreadystatechange = function () {
+  var state = document.readyState
+  if (state == 'interactive') {
+       document.getElementById('contents').style.visibility="hidden";
+  } else if (state == 'complete') {
+      setTimeout(function(){
+         document.getElementById('interactive');
+         document.getElementById('load').style.visibility="hidden";
+         document.getElementById('contents').style.visibility="visible";
+      },1000);
+  }
+}
+</script>
+</head>
+
+<body>
+	{{>header}}
+		<div id="load"></div>
+		<div>
+			<main>
+				<section id="contents">
+					<div class="payment">
+					<div class="flex-box">
+						<div class=""><a href="related_profession?TYPE=Makeup_Artist"><img src="views/photo/profession_icons/Makeup_Artist.jpeg" class="profession_icons"><h5>Makeup Artist</h5></a></div>
+						<div class=""><a href="related_profession?TYPE=Saloon"><img src="views/photo/profession_icons/Saloon.jpeg" class="profession_icons"><h5>Saloon</h5></a></div>
+						<div class=""><a href="related_profession?TYPE=Architecture"><img src="views/photo/profession_icons/Architecture.png" class="profession_icons"><h5>Architecture</h5></a></div>
+						<div class=""><a href="related_profession?TYPE=Plumber"><img src="views/photo/profession_icons/Plumber.png" class="profession_icons"><h5>Plumber</h5></a></div>
+						<div class=""><a href="related_profession?TYPE=Worker"><img src="views/photo/profession_icons/Worker.png" class="profession_icons"><h5>Worker</h5></a></div>
+						<div class=""><a href="related_profession?TYPE=Welder"><img src="views/photo/profession_icons/Welder.png" class="profession_icons"><h5>Welder</h5></a></div>
+					</div><br />
+					<div class="flex-box">
+						<div class=""><a href="related_profession?TYPE=Carpainter"><img src="views/photo/profession_icons/Carpainter.png" class="profession_icons"><h5>Carpainter</h5></a></div>
+						<div class=""><a href="related_profession?TYPE=Painter"><img src="views/photo/profession_icons/Painter.png" class="profession_icons"><h5>Painter</h5></a></div><br />
+						<div class=""><a href="related_profession?TYPE=Security_Guard"><img src="views/photo/profession_icons/Security_Guard.png" class="profession_icons"><h5>Security Guard</h5></a></div>
+						<div class=""><a href="related_profession?TYPE=Photographer"><img src="views/photo/profession_icons/Photographer.png" class="profession_icons" ><h5>Photographer</h5></a></div>
+						<div class=""><a href="related_profession?TYPE=Supervisor"><img src="views/photo/profession_icons/Supervisor.png" class="profession_icons"><h5>Supervisor</h5></a></div>
+						<div class=""><a href="related_profession?TYPE=School_Teacher"><img src="views/photo/profession_icons/School_Teacher.png" class="profession_icons"><h5>School Teacher</h5></a></div>
+					</div><br />
+					<div class="flex-box">
+						<div class=""><a href="related_profession?TYPE=Power_Electrician"><img src="views/photo/profession_icons/Power_Electric.jpeg" class="profession_icons"><h5>Power Electrician</h5></a></div>
+						<div class=""><a href="related_profession?TYPE=Cable_Jointer"><img src="views/photo/profession_icons/Cable_Jointer.png" class="profession_icons"><h5>Cable Jointer</h5></a></div>
+						<div class=""><a href="related_profession?TYPE=Refrigerator_&_Air-Conditioning_Mechanic"><img src="views/photo/profession_icons/Refrigerator&Air-ConditioningMechanic.png" class="profession_icons"><h5>Refrigerator & Air - Conditioning Mechanic</h5></a></div>
+						<div class=""><a href="related_profession?TYPE=Mechanic_Tv/Radio"><img src="views/photo/profession_icons/Mechanic_Tv_Radio.png" class="profession_icons"><h5>Mechanic Tv/Radio</h5></a></div>
+						<div class=""><a href="related_profession?TYPE=Hardware_Enginner"><img src="views/photo/profession_icons/Hardware_Enginner.png" class="profession_icons"><h5>Hardware Enginner</h5></a></div>
+						<div class=""><a href="related_profession?TYPE=Software_Engineeer"><img src="views/photo/profession_icons/Software_Engineeer.png" class="profession_icons"><h5>Software Engineeer</h5></a></div>
+					</div><br />
+					<div class="flex-box">
+						<div class=""><a href="related_profession?TYPE=Networking_Enginner"><img src="views/photo/profession_icons/Networking_Enginner.png" class="profession_icons"><h5>Networking Enginner</h5></a></div>
+						<div class=""><a href="related_profession?TYPE=Event_Management"><img src="views/photo/profession_icons/Event_Management.png" class="profession_icons"><h5>Event Management</h5></a></div>
+						<div class=""><a href="related_profession?TYPE=Wedding_Planner"><img src="views/photo/profession_icons/Wedding_Planner.png" class="profession_icons"><h5>Wedding Planner</h5></a></div>
+						<div class=""><a href="related_profession?TYPE=Fitness_Trainer"><img src="views/photo/profession_icons/Fitness_Trainer.png" class="profession_icons"><h5>Fitness Trainer</h5></a></div>
+						<div class=""><a href="related_profession?TYPE=Yoga_Trainer"><img src="views/photo/profession_icons/Yoga_Trainer.png" class="profession_icons"><h5>Yoga Trainer</h5></a></div>
+						<div class=""><a href="related_profession?TYPE=Automobile_Services"><img src="views/photo/profession_icons/Automobile_Services.png" class="profession_icons"><h5>Automobile Services <br />(24 x 7) </h5></a></div>
+					</div><br />
+					</div>
+				</section>
+			</main>
+			<!-- #main -->
+		</div>
+{{>footer}}
+{{>footer_js}}
+</body>
+
+</html>

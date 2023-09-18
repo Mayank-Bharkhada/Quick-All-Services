@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	{{>links}}
+<style>
+body{
+	background-color:#fbfbfb;
+}
+
+	section{
+		margin-top:200px;	
+		margin-bottom:0px;
+		padding:50px;
+	}
+
+	img{
+		margin:0px;
+		width:100%;
+		height:650px;
+	}
+	
+
+@media only screen and (max-width: 600px) {
+	
+	section{	
+		margin-top:100px;
+		margin-bottom:0px;
+	}
+	
+	img{
+		height:300px;
+	}
+}
+</style>
+<script>
+document.onreadystatechange = function () {
+  var state = document.readyState
+  if (state == 'interactive') {                                                                                                                      document.getElementById('contents').style.visibility="hidden";                                                                           } else if (state == 'complete') {                                                                                                                 setTimeout(function(){
+         document.getElementById('interactive');
+         document.getElementById('load').style.visibility="hidden";
+         document.getElementById('contents').style.visibility="visible";
+      },1000);
+  }
+}
+</script>
+</head>
+<body>
+	{{>header}}
+		<div id="load"></div>
+		<div>
+			<main>
+				<section id="contents">
+				<img src="../views/photo/aboutus_img.jpg">
+				</section>	
+			</main>
+			<!-- #main -->
+		</div>
+		<!-- footer goes here -->
+	
+	{{>footer}}
+	{{>footer_js}}
+</body>
+
+</html>
+
+

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	{{>links}}
+<style>
+	
+
+	section{
+		margun:0;
+		padding:20px;
+		padding-top:10rem;
+		background-color: #EEEEEE;
+	}
+	
+	.payment{
+		padding:50px;
+		padding-left:30%;
+		padding-right:30%;
+		background-color: #FFFFFF;
+	}
+	
+	form input{
+                width:90%;
+                margin:20px;
+                height:25px;
+		padding:5px;
+		border-radius:5px;
+                box-shadow:0 5px 10px rgba(.2,0,0,.2);
+                border:none;
+        }
+	
+	div.table{
+		padding:5px;
+		padding-top:20px;
+		padding-bottom:20px;
+		margin-top:20px;
+		margin-bottom:20px;
+		background-color: #FFFFFF;
+	}	
+	
+	table{
+		width:100%;
+		border:1px solid black;
+		border-collapse: collapse;
+	}
+	
+	th, tr, td{
+                border:1px solid black;
+		text-align: center;
+                border-collapse: collapse;
+        }
+
+	th{
+		padding:3px;
+		background-color: blue;
+		color: #FFFFFF;
+	}
+
+	tr.heading{
+		font-size:15px;
+		text-align: center;
+	}
+
+	div.flex-box{
+		background-color: #000000;
+		display:flex;
+	}	
+	
+	.btn{
+		padding:2px;
+		font-size:15px;
+		height:100%;
+		background-color:blue;
+		color: #FFFFFF;
+		box-shadow:0 5px 10px rgba(.2,0,0,.2);
+                border:none;
+	}
+
+	div.flex-btn{
+		padding:5px;
+		margin:5%;
+	}
+
+
+@media only screen and (max-width: 600px) {
+	body {
+		font-size:10px;
+	}
+	
+	section{
+		padding-top:8rem;
+	}
+		
+	.payment{
+		padding:5%;
+	}
+
+	td{		
+                font-size:3px;
+		padding-top:5px;
+		padding-botom:5px;
+        }
+
+	tr.heading{
+		font-size:7px;
+	}
+
+	
+	.btn{
+		font-size:13px;
+        }
+
+	div.flex-btn a{
+		font-size:10px;
+                margin:5px;
+	}
+	
+}
+</style>
+<script>
+document.onreadystatechange = function () {
+  var state = document.readyState
+  if (state == 'interactive') {
+       document.getElementById('contents').style.visibility="hidden";
+  } else if (state == 'complete') {
+      setTimeout(function(){
+         document.getElementById('interactive');
+         document.getElementById('load').style.visibility="hidden";
+         document.getElementById('contents').style.visibility="visible";
+      },1000);
+  }
+}
+</script>
+</head>
+<body>
+	{{>header}}
+		<div id="load"></div>
+		<div>
+			<main>
+				<section id="contents">
+					<div class="flex-box">
+                                        <div class="flex-btn"><a href="/pay_offline">Pay Offline</a></div>
+                                        <div class="flex-btn"><a href="/varification_request">Varification Requests</a></div>
+                                        <div class="flex-btn"><a href="/search_hired">Search Hired By User's Number</a></div>
+                                        </div>
+					<div class="flex-box">
+					<div class="flex-btn"><a href="/block_id">Block ID</a></div>
+                                        <div class="flex-btn"><a href="/pay_membership">Data For Membership Payment</a></div>
+					<div class="flex-btn"><a href="/all_users">All User's details</a></div>
+                                        </div>
+					<div class="payment">
+                                        <form action="/unpaid_payment" method="POST">
+                                        <label for="Number">Number :</label><br />
+                                        <input type="text" class="" maxlength="13" pattern="(\+91)?(-)?\s*?(91)?\s*?(\d{3})-?\s*?(\d{3})-?\s*?(\d{4})"  id="number" name="Mobile_number" value="+91">
+                                        <input type="submit" class="btn" id="button"  value="Search for unpaid">
+                                        </form>
+                                        </div>
+                                        <div  class="table">
+                                        <table id="search_data" border="1px" cellpadding="20px" cellspacing="2px">
+                                        </table>
+					</div>
+				</section>	
+<script>
+let Encoded = "{{UNPAID_PROFESSIONAL}}";
+
+
+function decodeHTMLEntities(text) {
+var textarea = document.createElement('textArea');
+textarea.innerHTML = text;
+return textarea.value;
+}
+
+var Decoded = decodeHTMLEntities(Encoded);
+console.log(Decoded);
+var data_object = JSON.parse(Decoded);
+console.log(data_object);
+
+var table = `<tr class="heading">
+                <th>Professional Name</th>
+                <th>Professional Number</th>
+                <th>User Name</th>
+                <th>User Number</th>
+                <th>Payment Code</th>
+		<th>Date</th>
+              </tr>`;
+
+var data = "";
+var i = 0;
+
+console.log(data_object[0]["NAME"]);
+data_object.forEach(info => {
+
+data += `<tr>
+        <td>${data_object[i]["CONNECTED"][0]["NAME"]}</td>
+        <td>${data_object[i]["CONNECTED"][0]["NUMBER"]}</td>
+        <td>${data_object[i]["NAME"]}</td>
+        <td>${data_object[i]["NUMBER"]}</td>
+        <td>${data_object[i]["CODE"]}</td>
+	<td>${data_object[i]["TODAY_DATE"][0]["DAY"]}/${data_object[i]["TODAY_DATE"][0]["MONTH"]}/${data_object[i]["TODAY_DATE"][0]["YEAR"]}</td>
+        </tr>`;
+i = i + 1;
+}
+);
+
+table += data;
+
+console.log(table);
+
+document.getElementById("search_data").innerHTML = table;
+
+</script>
+{{>number_validation}}
+			</main>
+			<!-- #main -->
+		</div>
+		<!-- footer goes here -->
+	
+	{{>footer}}
+	{{>footer_js}}
+</body>
+
+</html>
+
+
